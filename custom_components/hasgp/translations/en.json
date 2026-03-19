@@ -1,0 +1,157 @@
+{
+	"title": "HASGP",
+	"config": {
+		"step": {
+			"user": {
+				"title": "HASGP",
+				"description": "Choose the HASGP service to add.",
+				"menu_options": {
+					"device_energy_cost": "Device Energy Cost",
+					"weather": "Weather"
+				}
+			},
+			"device_energy_cost": {
+				"title": "Device Energy Cost",
+				"description": "Select one or more energy entities.",
+				"data": {
+					"energy_entity_ids": "Entities"
+				}
+			},
+			"device_energy_cost_naming": {
+				"title": "Device Energy Cost",
+				"description": "Name your generated cost sensors.",
+				"data": {
+					"sensor_name_0": "Sensor name",
+					"sensor_name_1": "Sensor name",
+					"sensor_name_2": "Sensor name",
+					"sensor_name_3": "Sensor name",
+					"sensor_name_4": "Sensor name",
+					"sensor_name_5": "Sensor name",
+					"sensor_name_6": "Sensor name",
+					"sensor_name_7": "Sensor name",
+					"sensor_name_8": "Sensor name",
+					"sensor_name_9": "Sensor name",
+					"sensor_name_10": "Sensor name",
+					"sensor_name_11": "Sensor name",
+					"sensor_name_12": "Sensor name",
+					"sensor_name_13": "Sensor name",
+					"sensor_name_14": "Sensor name",
+					"sensor_name_15": "Sensor name",
+					"sensor_name_16": "Sensor name",
+					"sensor_name_17": "Sensor name",
+					"sensor_name_18": "Sensor name",
+					"sensor_name_19": "Sensor name",
+					"sensor_name_20": "Sensor name",
+					"sensor_name_21": "Sensor name",
+					"sensor_name_22": "Sensor name",
+					"sensor_name_23": "Sensor name",
+					"sensor_name_24": "Sensor name",
+					"sensor_name_25": "Sensor name",
+					"sensor_name_26": "Sensor name",
+					"sensor_name_27": "Sensor name",
+					"sensor_name_28": "Sensor name",
+					"sensor_name_29": "Sensor name",
+					"sensor_name_30": "Sensor name",
+					"sensor_name_31": "Sensor name",
+					"sensor_name_32": "Sensor name",
+					"sensor_name_33": "Sensor name",
+					"sensor_name_34": "Sensor name",
+					"sensor_name_35": "Sensor name",
+					"sensor_name_36": "Sensor name",
+					"sensor_name_37": "Sensor name",
+					"sensor_name_38": "Sensor name",
+					"sensor_name_39": "Sensor name",
+					"sensor_name_40": "Sensor name",
+					"sensor_name_41": "Sensor name",
+					"sensor_name_42": "Sensor name",
+					"sensor_name_43": "Sensor name",
+					"sensor_name_44": "Sensor name",
+					"sensor_name_45": "Sensor name",
+					"sensor_name_46": "Sensor name",
+					"sensor_name_47": "Sensor name",
+					"sensor_name_48": "Sensor name",
+					"sensor_name_49": "Sensor name"
+				}
+			}
+		},
+		"abort": {
+			"already_configured": "Service is already added.",
+			"reconfigure_successful": "Service was updated successfully.",
+			"not_implemented": "Service is not yet implemented."
+		}
+	},
+	"options": {
+		"step": {
+			"device_energy_cost_options": {
+				"title": "Device Energy Cost",
+				"description": "Update the selected energy entities.",
+				"data": {
+					"energy_entity_ids": "Entities"
+				}
+			},
+			"device_energy_cost_options_naming": {
+				"title": "Device Energy Cost",
+				"description": "Update the generated cost sensor names.",
+				"data": {
+					"sensor_name_0": "Sensor name",
+					"sensor_name_1": "Sensor name",
+					"sensor_name_2": "Sensor name",
+					"sensor_name_3": "Sensor name",
+					"sensor_name_4": "Sensor name",
+					"sensor_name_5": "Sensor name",
+					"sensor_name_6": "Sensor name",
+					"sensor_name_7": "Sensor name",
+					"sensor_name_8": "Sensor name",
+					"sensor_name_9": "Sensor name",
+					"sensor_name_10": "Sensor name",
+					"sensor_name_11": "Sensor name",
+					"sensor_name_12": "Sensor name",
+					"sensor_name_13": "Sensor name",
+					"sensor_name_14": "Sensor name",
+					"sensor_name_15": "Sensor name",
+					"sensor_name_16": "Sensor name",
+					"sensor_name_17": "Sensor name",
+					"sensor_name_18": "Sensor name",
+					"sensor_name_19": "Sensor name",
+					"sensor_name_20": "Sensor name",
+					"sensor_name_21": "Sensor name",
+					"sensor_name_22": "Sensor name",
+					"sensor_name_23": "Sensor name",
+					"sensor_name_24": "Sensor name",
+					"sensor_name_25": "Sensor name",
+					"sensor_name_26": "Sensor name",
+					"sensor_name_27": "Sensor name",
+					"sensor_name_28": "Sensor name",
+					"sensor_name_29": "Sensor name",
+					"sensor_name_30": "Sensor name",
+					"sensor_name_31": "Sensor name",
+					"sensor_name_32": "Sensor name",
+					"sensor_name_33": "Sensor name",
+					"sensor_name_34": "Sensor name",
+					"sensor_name_35": "Sensor name",
+					"sensor_name_36": "Sensor name",
+					"sensor_name_37": "Sensor name",
+					"sensor_name_38": "Sensor name",
+					"sensor_name_39": "Sensor name",
+					"sensor_name_40": "Sensor name",
+					"sensor_name_41": "Sensor name",
+					"sensor_name_42": "Sensor name",
+					"sensor_name_43": "Sensor name",
+					"sensor_name_44": "Sensor name",
+					"sensor_name_45": "Sensor name",
+					"sensor_name_46": "Sensor name",
+					"sensor_name_47": "Sensor name",
+					"sensor_name_48": "Sensor name",
+					"sensor_name_49": "Sensor name"
+				}
+			}
+		}
+	},
+	"entity": {
+		"sensor": {
+			"tariff": {
+				"name": "Electricity Tariff"
+			}
+		}
+	}
+}
