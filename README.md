@@ -10,7 +10,7 @@ A Home Assistant custom integration that fetches the latest Singapore electricit
 - Uses a GST-inclusive tariff for cost calculation
 - Creates cost sensors from selected entities with device class `energy`
 - Allows custom names for generated cost sensors
-- Falls back to the previous month if the current month's tariff is not yet available
+- Falls back to the latest available tariff if the current month's tariff is not yet available
 
 ### Weather
 - Coming soon

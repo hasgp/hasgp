@@ -48,7 +48,7 @@ class ApiClient:
         series_name: str = DEFAULT_SERIES_NAME,
         now: datetime | None = None,
     ) -> TariffResult:
-        """Fetch and normalize the tariff for the current month with fallback."""
+        """Fetch and normalize the latest available tariff."""
         now = now or datetime.now()
 
         try:
@@ -67,35 +67,34 @@ class ApiClient:
 
         row = self._find_series_row(records, series_name)
         current_key = now.strftime("%Y %b")
-        previous_month = self._previous_month(now)
-        previous_key = previous_month.strftime("%Y %b")
+        available_months: list[tuple[datetime, str, float]] = []
+        for key, value in row.items():
+            month = self._parse_month_key(str(key))
+            parsed_value = self._coerce_float(value)
+            if (
+                month is not None
+                and parsed_value is not None
+                and (month.year, month.month) <= (now.year, now.month)
+            ):
+                available_months.append((month, str(key), parsed_value))
 
-        resolved_current_key = self._resolve_month_key(row, current_key)
-        resolved_previous_key = self._resolve_month_key(row, previous_key)
-
-        raw_value = self._coerce_float(
-            row.get(resolved_current_key) if resolved_current_key else None
-        )
-        fallback_used = False
-        chosen_key = current_key
-
-        if raw_value is None:
-            raw_value = self._coerce_float(
-                row.get(resolved_previous_key) if resolved_previous_key else None
-            )
-            fallback_used = True
-            chosen_key = previous_key
-
-        if raw_value is None:
+        if not available_months:
             available_month_keys = sorted(
                 key
                 for key in row
                 if self._looks_like_month_key(str(key))
             )
             raise ApiDataError(
-                f"No tariff data found for {current_key} or {previous_key}. "
+                f"No tariff data found up to {current_key}. "
                 f"Available month keys: {available_month_keys[-6:]}"
             )
+
+        source_date, chosen_key, raw_value = max(
+            available_months, key=lambda month: month[0]
+        )
+        fallback_used = (
+            source_date.year != now.year or source_date.month != now.month
+        )
 
         return TariffResult(
             cents_per_kwh=raw_value,
@@ -132,18 +131,6 @@ class ApiClient:
         )
 
 
-    @classmethod
-    def _resolve_month_key(
-        cls, record: Mapping[str, object], wanted_key: str
-    ) -> str | None:
-        normalized_wanted = cls._normalize_key(wanted_key)
-
-        for key in record:
-            if cls._normalize_key(str(key)) == normalized_wanted:
-                return str(key)
-
-        return None
-
     @staticmethod
     def _normalize_key(value: str) -> str:
         return re.sub(r"[^a-z0-9]", "", value.lower())
@@ -152,6 +139,32 @@ class ApiClient:
     def _looks_like_month_key(cls, value: str) -> bool:
         normalized = cls._normalize_key(value)
         return bool(re.fullmatch(r"_?\d{4}(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)", normalized))
+
+    @classmethod
+    def _parse_month_key(cls, value: str) -> datetime | None:
+        normalized = cls._normalize_key(value)
+        match = re.fullmatch(
+            r"(\d{4})(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)",
+            normalized,
+        )
+        if match is None:
+            return None
+
+        month_number = {
+            "jan": 1,
+            "feb": 2,
+            "mar": 3,
+            "apr": 4,
+            "may": 5,
+            "jun": 6,
+            "jul": 7,
+            "aug": 8,
+            "sep": 9,
+            "oct": 10,
+            "nov": 11,
+            "dec": 12,
+        }[match.group(2)]
+        return datetime(int(match.group(1)), month_number, 1)
 
     @staticmethod
     def _coerce_float(value: object) -> float | None:
@@ -162,9 +175,3 @@ class ApiClient:
         except (TypeError, ValueError):
             _LOGGER.debug("Unable to convert tariff value %s to float", value)
             return None
-
-    @staticmethod
-    def _previous_month(value: datetime) -> datetime:
-        if value.month == 1:
-            return value.replace(year=value.year - 1, month=12)
-        return value.replace(month=value.month - 1)
