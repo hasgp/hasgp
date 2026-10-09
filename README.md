@@ -1,18 +1,17 @@
 # HASGP
 
-A Home Assistant custom integration that fetches the latest Singapore electricity tariff from [data.gov.sg](https://data.gov.sg) and creates corresponding sensors.
+A Home Assistant custom integration that uses the latest published Singapore electricity tariff and creates corresponding sensors.
 
 ## Features
 
 ### Device Energy Cost
 
-- Automatically pulls electricity tariff data from data.gov.sg every 24 hours
-- Uses a GST-inclusive tariff for cost calculation
+- Uses a GST-inclusive tariff for cost calculation based on the latest published rate
 - Creates cost sensors from selected entities with device class `energy`
 - Allows custom names for generated cost sensors
-- Falls back to the latest available tariff if the current month's tariff is not yet available
 
 ### Weather
+
 - Coming soon
 
 ## Installation
@@ -28,7 +27,3 @@ A Home Assistant custom integration that fetches the latest Singapore electricit
 ### Project
 
 Licensed under the [MIT License](LICENSE).
-
-### Dataset
-
-Sourced from [data.gov.sg](https://data.gov.sg). Usage is governed by the [Singapore Open Data Licence](https://data.gov.sg/open-data-licence).

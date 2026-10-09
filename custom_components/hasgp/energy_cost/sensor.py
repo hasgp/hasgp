@@ -19,12 +19,11 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .. import HasgpRuntimeData
 from .const import (
-    ATTR_DATA_SERIES,
+    ATTR_CENTS_PER_KWH,
     ATTR_ENERGY_KWH,
-    ATTR_FALLBACK_USED,
     ATTR_GST_RATE,
     ATTR_SOURCE_ENTITY_ID,
-    ATTR_SOURCE_MONTH,
+    ATTR_TARIFF_SOURCE,
     CONF_ENTITY_NAMES,
     CONF_ENERGY_ENTITY_IDS,
     TARIFF_KEY,
@@ -122,10 +121,9 @@ class BaseEntity(CoordinatorEntity[Coordinator], SensorEntity):
     def extra_state_attributes(self) -> dict[str, Any]:
         data = self.coordinator.data or {}
         return {
-            ATTR_SOURCE_MONTH: data.get("source_month"),
-            ATTR_FALLBACK_USED: data.get("fallback_used"),
-            ATTR_DATA_SERIES: data.get("data_series"),
+            ATTR_TARIFF_SOURCE: data.get(ATTR_TARIFF_SOURCE),
             ATTR_GST_RATE: data.get("gst_rate"),
+            ATTR_CENTS_PER_KWH: data.get("cents_per_kwh"),
         }
 
 
